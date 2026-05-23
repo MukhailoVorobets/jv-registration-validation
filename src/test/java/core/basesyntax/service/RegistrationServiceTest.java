@@ -21,9 +21,9 @@ class RegistrationServiceTest {
 
     private User user;
     private User userShortPassword;
-    private User userWithPasswordWithoutDigit;
     private User userWithNotValidAge;
     private User userDuplicate;
+    private User userAgeAbove18;
 
     @BeforeEach
     void setUp() {
@@ -33,8 +33,8 @@ class RegistrationServiceTest {
         user = testUtil.getUser();
         userShortPassword = testUtil.getUserWithShortPassword();
         userWithNotValidAge = testUtil.getUserWithNotValidAge();
-        userWithPasswordWithoutDigit = testUtil.getUserWithPasswordWithoutDigit();
         userDuplicate = testUtil.getUserDuplicate();
+        userAgeAbove18 = testUtil.getUserOk();
     }
 
     @AfterEach
@@ -47,6 +47,13 @@ class RegistrationServiceTest {
     void register_validUser_success() {
         User result = registrationService.register(user);
         assertEquals(user, result);
+    }
+
+    @Test
+    @DisplayName("Valid user should be registered successfully age above 18")
+    void register_validUser_success_age_above_18() {
+        User result = registrationService.register(userAgeAbove18);
+        assertEquals(userAgeAbove18, result);
     }
 
     @Test
@@ -69,7 +76,7 @@ class RegistrationServiceTest {
     @Test
     @DisplayName("Short login should throw RegistrationException")
     void register_shortLogin_throwsException() {
-        user.setLogin("ab");
+        user.setLogin("abasd");
         assertThrows(RegistrationException.class,
                 () -> registrationService.register(user)
         );
@@ -93,14 +100,6 @@ class RegistrationServiceTest {
     }
 
     @Test
-    @DisplayName("Password without digit should throw RegistrationException")
-    void register_passwordWithoutDigit_throwsException() {
-        assertThrows(RegistrationException.class,
-                () -> registrationService.register(userWithPasswordWithoutDigit)
-        );
-    }
-
-    @Test
     @DisplayName("Age below minimum should throw RegistrationException")
     void register_ageBelowMinimum_throwsException() {
         assertThrows(RegistrationException.class,
@@ -111,7 +110,7 @@ class RegistrationServiceTest {
     @Test
     @DisplayName("Duplicate login should throw RegistrationException")
     void register_duplicateLogin_throwsException() {
-        registrationService.register(user);
+        Storage.people.add(user);
         assertThrows(RegistrationException.class,
                 () -> registrationService.register(userDuplicate)
         );

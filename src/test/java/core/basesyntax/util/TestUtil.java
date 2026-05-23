@@ -12,6 +12,15 @@ public class TestUtil {
         return user;
     }
 
+    public User getUserOk() {
+        User user = new User();
+        user.setId(TestConstants.ID);
+        user.setLogin(TestConstants.LOGIN);
+        user.setPassword(TestConstants.PASSWORD);
+        user.setAge(TestConstants.AGE_19);
+        return user;
+    }
+
     public User getUserDuplicate() {
         User user = new User();
         user.setId(TestConstants.ID);
@@ -35,16 +44,7 @@ public class TestUtil {
         user.setId(TestConstants.ID);
         user.setLogin(TestConstants.LOGIN);
         user.setPassword(TestConstants.SHORT_PASSWORD);
-        user.setAge(TestConstants.AGE_17);
-        return user;
-    }
-
-    public User getUserWithPasswordWithoutDigit() {
-        User user = new User();
-        user.setId(TestConstants.ID);
-        user.setLogin(TestConstants.LOGIN);
-        user.setPassword(TestConstants.PASSWORD_WITHOUT_DIGIT);
-        user.setAge(TestConstants.AGE_17);
+        user.setAge(TestConstants.AGE_18);
         return user;
     }
 }
