@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -10,8 +13,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RegistrationServiceTest {
     private RegistrationService registrationService;
@@ -34,7 +35,7 @@ class RegistrationServiceTest {
         userWithNotValidAge = testUtil.getUserWithNotValidAge();
         userWithPasswordWithoutDigit = testUtil.getUserWithPasswordWithoutDigit();
         userDuplicate = testUtil.getUserDuplicate();
-     }
+    }
 
     @AfterEach
     void cleanUp() {

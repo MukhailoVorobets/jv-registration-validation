@@ -7,9 +7,8 @@ import core.basesyntax.model.User;
 import core.basesyntax.validator.UserValidator;
 
 public class RegistrationServiceImpl implements RegistrationService {
-    private final StorageDao storageDao =  new StorageDaoImpl();
-    private final UserValidator userValidator =  new UserValidator();
-
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final UserValidator userValidator = new UserValidator();
 
     @Override
     public User register(User user) {
