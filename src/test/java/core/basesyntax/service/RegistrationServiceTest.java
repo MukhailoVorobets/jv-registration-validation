@@ -94,14 +94,6 @@ class RegistrationServiceTest {
     }
 
     @Test
-    @DisplayName("Short password should throw RegistrationException")
-    void register_shortPassword_notOk() {
-        assertThrows(RegistrationException.class,
-                () -> registrationService.register(userShortPassword)
-        );
-    }
-
-    @Test
     @DisplayName("Age below minimum should throw RegistrationException")
     void register_ageBelowMinimum_notOk() {
         assertThrows(RegistrationException.class,
@@ -120,7 +112,7 @@ class RegistrationServiceTest {
 
     @Test
     @DisplayName("Password 4 chars throw RegistrationException")
-    void register_password5Chars_notOk() {
+    void register_password4Chars_notOk() {
         user.setPassword(TestConstants.SHORT_PASSWORD);
         assertThrows(RegistrationException.class,
                 () -> registrationService.register(user));
@@ -138,6 +130,30 @@ class RegistrationServiceTest {
     @DisplayName("Password 5 chars throw RegistrationException")
     void register_passwordFiveChars_notOk() {
         user.setPassword(TestConstants.SHORT_PASSWORD_5_CHARS);
+        assertThrows(RegistrationException.class,
+                () -> registrationService.register(user));
+    }
+
+    @Test
+    @DisplayName("Age null throw RegistrationException")
+    void register_nullAge_notOk() {
+        user.setAge(null);
+        assertThrows(RegistrationException.class,
+                () -> registrationService.register(user));
+    }
+
+    @Test
+    @DisplayName("Empty login throw RegistrationException")
+    void register_emptyLogin_notOk() {
+        user.setLogin("");
+        assertThrows(RegistrationException.class,
+                () -> registrationService.register(user));
+    }
+
+    @Test
+    @DisplayName("Empty login throw RegistrationException")
+    void register_emptyPassword_notOk() {
+        user.setPassword("");
         assertThrows(RegistrationException.class,
                 () -> registrationService.register(user));
     }
